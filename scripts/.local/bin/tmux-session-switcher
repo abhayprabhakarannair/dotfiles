@@ -21,7 +21,7 @@ function find_directories {
 }
 
 # Define base directories
-BASE_DIRS=(~/.config ~/Developer)
+BASE_DIRS=(~/dotfiles ~/.config ~/Developer)
 
 # Cache the directory selection
 selected=$(find_directories)
