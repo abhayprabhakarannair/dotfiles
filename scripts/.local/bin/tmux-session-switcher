@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Function to display an error message and exit
+function error_exit {
+    echo "$1"
+    exit 1
+}
+
+# Check if tmux is installed
+command -v tmux &> /dev/null || error_exit "tmux is not installed. Please install it first."
+
+# Function to find directories using fd or find
+function find_directories {
+    if command -v fd &> /dev/null; then
+        # Use fd to find directories with match-all pattern
+        fd . "${BASE_DIRS[@]}" --type d --min-depth 1 --max-depth 1 | fzf
+    else
+        # Fallback to find
+        find "${BASE_DIRS[@]}" -mindepth 1 -maxdepth 1 -type d | fzf
+    fi
+}
+
+# Define base directories
+BASE_DIRS=(~/.config ~/Developer)
+
+# Cache the directory selection
+selected=$(find_directories)
+
+# Exit if no selection was made
+[[ -z $selected ]] && error_exit "No directory selected."
+
+selected_name=$(basename "$selected" | tr . _)
+
+# Check for existing session
+session_exists() {
+    tmux has-session -t="$1" 2> /dev/null
+}
+
+# Check for an existing session and handle accordingly
+if [[ -z $TMUX ]]; then
+    if session_exists "$selected_name"; then
+        tmux attach-session -t "$selected_name"
+    else
+        tmux new-session -ds "$selected_name" -c "$selected"
+        tmux attach-session -t "$selected_name"
+    fi
+else
+    if ! session_exists "$selected_name"; then
+        tmux new-session -ds "$selected_name" -c "$selected"
+    fi
+    tmux switch-client -t "$selected_name"
+fi
+
