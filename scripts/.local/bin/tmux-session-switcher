@@ -21,7 +21,7 @@ function find_directories {
 }
 
 # Define base directories
-BASE_DIRS=(~/dotfiles ~/.config ~/Developer)
+BASE_DIRS=(~/dotfiles ~/.config ~/Developer ~/Developer/projects ~/Developer/projects/zenxapps)
 
 # Cache the directory selection
 selected=$(find_directories)
