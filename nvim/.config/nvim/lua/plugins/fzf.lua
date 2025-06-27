@@ -36,8 +36,13 @@ return {
 			},
 		},
 		config = function()
+			local fzf = require("fzf-lua")
+			
 			-- Trouble integration
-			require("fzf-lua").config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
+			fzf.config.defaults.actions.files["ctrl-t"] = require("trouble.sources.fzf").actions.open
+			
+			-- Set fzf-lua as vim.ui.select backend
+			fzf.register_ui_select()
 		end,
 	},
 }
