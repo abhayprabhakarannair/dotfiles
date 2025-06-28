@@ -9,7 +9,11 @@ return {
 				markdown = { "markdownlint" },
 				typescript = { "eslint_d" },
 				javascript = { "eslint_d" },
+				typescriptreact = { "eslint_d" },
+				javascriptreact = { "eslint_d" },
 				html = { "eslint_d" },
+				css = { "stylelint" },
+				scss = { "stylelint" },
 				python = { "ruff" },
 			}
 		end,
