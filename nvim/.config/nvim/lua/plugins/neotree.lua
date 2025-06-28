@@ -1,4 +1,5 @@
 return {
+
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		branch = "v3.x",
@@ -18,6 +19,23 @@ return {
 			},
 			hide_root_node = true,
 			retain_hidden_root_indent = true,
+			default_component_configs = {
+				git_status = {
+					symbols = {
+						-- Change type
+						added = "✚",
+						modified = "✱",
+						deleted = "✖",
+						renamed = "󰁕",
+						-- Status type
+						untracked = "",
+						ignored = "",
+						unstaged = "●",
+						staged = "✓",
+						conflict = "!",
+					},
+				},
+			},
 			filesystem = {
 				filtered_items = {
 					visible = true, -- when true, they will just be displayed differently than normal items
