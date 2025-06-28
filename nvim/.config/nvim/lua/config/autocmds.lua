@@ -1,9 +1,33 @@
 -- Run lint on these scenarios
+local lint_helper_biome = require("utils.lint_helper_biome")
 local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave", "TextChanged" }, {
 	group = lint_augroup,
 	callback = function()
-		require("lint").try_lint()
+		local ft = vim.bo.filetype
+
+		local skip_filetypes = {
+			"TelescopePrompt",
+			"neo-tree",
+			"dashboard",
+			"log",
+			"fugitive",
+			"gitcommit",
+			"txt",
+			"help",
+		}
+
+		if not vim.tbl_contains(skip_filetypes, ft) then
+			require("lint").try_lint()
+		end
+	end,
+})
+
+-- Dynamic Linter Selection Autocmd
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+	group = lint_augroup,
+	callback = function(args)
+		lint_helper_biome.select_biome_linters(args.buf)
 	end,
 })
 

@@ -2,7 +2,18 @@ return {
 	{
 		"mason-org/mason-lspconfig.nvim",
 		opts = {
-			ensure_installed = { "lua_ls", "gopls", "pylsp", "ruff", "angularls", "ts_ls", "html", "cssls", "jsonls" },
+			ensure_installed = {
+				"lua_ls",
+				"gopls",
+				"pylsp",
+				"ruff",
+				"angularls",
+				"ts_ls",
+				"html",
+				"cssls",
+				"jsonls",
+				"biome",
+			},
 		},
 		dependencies = {
 			{

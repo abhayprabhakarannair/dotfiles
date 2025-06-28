@@ -34,11 +34,11 @@ return {
 			formatters_by_ft = {
 				lua = { "stylua" },
 				python = { "ruff_organize_imports", "ruff_fix", "ruff_format" },
-				javascript = { "prettierd", "prettier", stop_after_first = true },
-				typescript = { "prettierd", "prettier", stop_after_first = true },
+				javascript = { "biome", "prettierd", "prettier", stop_after_first = true },
+				typescript = { "biome", "prettierd", "prettier", stop_after_first = true },
 				html = { "prettierd", "prettier", stop_after_first = true },
 				scss = { "prettierd", "prettier", stop_after_first = true },
-				css = { "prettierd", "prettier", stop_after_first = true },
+				css = { "biome", "prettierd", "prettier", stop_after_first = true },
 				go = { "goimports", "golines", "gofmt" },
 			},
 			formatters = {
